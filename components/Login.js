@@ -47,7 +47,7 @@ function LogIn() {
   };
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center bg-slate-800 text-center">
+    <div className="flex min-h-screen w-full flex-col items-center justify-center text-center">
       <div className="mb-8 rounded-3xl bg-white/60 p-1.5 shadow-xl">
         <button
           onClick={() => handleAuth()}

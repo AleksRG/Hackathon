@@ -26,7 +26,7 @@ function Sprite({ image, data, position, name, emoji, message, playerName }) {
         }}
       >
         {!emoji && !message ? (
-          playerName.length >= 8 ? (
+          !playerName ? (
             <p className="-mt-5 -ml-4 text-xs font-bold text-[#041836]">
               {name?.substring(0, 4)}
               ...

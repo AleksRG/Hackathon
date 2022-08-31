@@ -1,60 +1,75 @@
 import React, { useEffect } from "react";
 import Actor from "./Actor";
-/* import Col from "./Col"; */
-import useKeyPress from "./useKeyPress";
+import useKeyPress from "../hooks/useKeyPress";
 import useWalk from "../hooks/useWalk";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  updateDoc,
+  setDoc,
+  query,
+  onSnapshot,
+  where,
+  getDoc,
+} from "firebase/firestore";
 
-function Player({ emoji, message, typing, hero }) {
-  const { user, Moralis } = useMoralis();
+function Player({
+  emoji,
+  message,
+  typing,
+  hero,
+  database,
+  user,
+  playerName,
+  map,
+}) {
   const { dir, step, walk, position } = useWalk(3);
   const data = {
     h: 32,
     w: 32,
   };
-
-  const GameState = Moralis.Object.extend("GameState");
-  const query = new Moralis.Query(GameState);
-
-  async function stateDBReference() {
-    //Find or create new GameState row
-    query.equalTo("player", user.get("ethAddress"));
-    var gameState = await query.first();
-    if (!gameState) {
-      gameState = new GameState();
-      gameState.set("player", user.get("ethAddress"));
-      gameState.set("playerName", user.get("username"));
-    }
-    return gameState;
-  }
-
   let imageX = step * data.h;
   let imageY = dir * data.w;
 
-  async function persistState() {
-    var gameState = await stateDBReference();
-    // upload the state
-    gameState.set("player", user.get("ethAddress"));
-    gameState.set("emoji", emoji);
-    gameState.set("message", message);
-    gameState.set("x", hero);
-    gameState.set("positionX", position.x);
-    gameState.set("positionY", position.y);
-    gameState.set("imageX", imageX);
-    gameState.set("imageY", imageY);
-    gameState.set("map", "main");
-    gameState.set("playerName", user.get("username"));
-    await gameState.save(null, { useMasterKey: true });
+  //ADD DATA TO DB
+  const player = doc(database, "Players", user.address);
+  async function stateDBReference() {
+    const checkPlayer = await getDoc(player); //-> chek is exist
+    if (checkPlayer.exists()) {
+      updateDoc(player, {
+        emoji: emoji,
+        message: message,
+        positionX: position.x,
+        positionY: position.y,
+        sprite: "a4",
+        imageX: imageX,
+        imageY: imageY,
+        playerName: playerName,
+        map: "main",
+      });
+      // console.log(`You are updated ${user.address}`);
+    } else {
+      // doc.data() will be undefined in this case
+      setDoc(player, {
+        address: user.address,
+        emoji: "",
+        message: "",
+        positionX: 336,
+        positionY: 428,
+        sprite: "a4",
+        imageX: 0,
+        imageY: 0,
+        playerName: "",
+        map: map,
+      });
+    }
   }
-
   useEffect(() => {
-    persistState();
+    stateDBReference();
   }, [emoji, message, step]);
 
-  useEffect(() => {
-    persistState();
-  }, [hero]);
-
-  /*   console.log(position) */
   useKeyPress((e) => {
     if (!typing) {
       switch (e.key.toLowerCase()) {
@@ -972,7 +987,7 @@ function Player({ emoji, message, typing, hero }) {
         <Col x={a} y={b} key={i} />
       ))} */}
       <Actor
-        name={user.get("ethAddress")}
+        name={user.address}
         sprite={`/sprites/skins/${hero}.png`}
         data={data}
         step={step}
@@ -980,7 +995,7 @@ function Player({ emoji, message, typing, hero }) {
         position={position}
         emoji={emoji}
         message={message}
-        playerName={user.get("username")}
+        playerName={playerName}
       />
     </div>
   );
