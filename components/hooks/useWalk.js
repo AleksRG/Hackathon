@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-function useWalk(maxSteps) {
+function useWalk(maxSteps, x, y) {
   const [position, setPosition] = useState({
-    x: 32,
-    y: 412,
+    x: x,
+    y: y,
   });
   const [dir, setDir] = useState(0);
   const [step, setStep] = useState(0);
@@ -33,14 +33,8 @@ function useWalk(maxSteps) {
 
   function move(dir) {
     setPosition((prev) => ({
-      x:
-        prev.x + modifier[dir].x >= 0 /* && prev.x + modifier[dir].x <= 3450 */
-          ? prev.x + modifier[dir].x
-          : prev.x,
-      y:
-        /* prev.y + modifier[dir].y <= 1360 && */ prev.y + modifier[dir].y >= 0
-          ? prev.y + modifier[dir].y
-          : prev.y,
+      x: prev.x + modifier[dir].x >= 0 ? prev.x + modifier[dir].x : prev.x,
+      y: prev.y + modifier[dir].y >= 0 ? prev.y + modifier[dir].y : prev.y,
     }));
   }
   return {

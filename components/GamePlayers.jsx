@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import Players from "./Players";
-function GamePlayers({ database, user }) {
+function GamePlayers({ database, user, map }) {
   const colectionRef = collection(database, "Players");
   const [players, setPlayers] = useState();
   const data = () => {
@@ -22,6 +22,7 @@ function GamePlayers({ database, user }) {
       {players &&
         players
           .filter((x) => x.address != user.address)
+          .filter((x) => x.map == map)
           .map((attributes) => <Players attributes={attributes} />)}
     </div>
   );
