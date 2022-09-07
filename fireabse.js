@@ -1,8 +1,8 @@
 import { initializeApp } from "firebase/app";
-import { get, getFirestore } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDl58DFh1EafhIi8qIdvmUV8JB6ZiPStqY",
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "hackathon-baa0c.firebaseapp.com",
   projectId: "hackathon-baa0c",
   storageBucket: "hackathon-baa0c.appspot.com",

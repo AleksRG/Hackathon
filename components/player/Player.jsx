@@ -2,12 +2,7 @@ import React, { useEffect, useState } from "react";
 import Actor from "./Actor";
 import useKeyPress from "../hooks/useKeyPress";
 import useWalk from "../hooks/useWalk";
-import {
-  doc,
-  updateDoc,
-  setDoc,
-  getDoc,
-} from "firebase/firestore";
+import { doc, updateDoc, setDoc, getDoc } from "firebase/firestore";
 
 function Player({
   emoji,
@@ -35,7 +30,7 @@ function Player({
       setY(423);
       position.x = 32;
       position.y = 423;
-    } else if (map === "main") {
+    } else if (map === "Main") {
       setX(500);
       setY(520);
       position.x = 536;
@@ -53,7 +48,6 @@ function Player({
   async function stateDBReference() {
     const checkPlayer = await getDoc(player); //-> chek is exist
     if (checkPlayer.exists()) {
-      /*     console.log(checkPlayer.data().sprite); */
       updateDoc(player, {
         emoji: emoji,
         message: message,
@@ -65,7 +59,6 @@ function Player({
         playerName: playerName,
         map: map,
       });
-      // console.log(`You are updated ${user.address}`);
     } else {
       // doc.data() will be undefined in this case
       setDoc(player, {
@@ -91,7 +84,7 @@ function Player({
       switch (e.key.toLowerCase()) {
         case "w":
           let move = true;
-          (map === "main" ? boundaries : boundaries2).forEach(([x, y]) => {
+          (map === "Main" ? boundaries : boundaries2).forEach(([x, y]) => {
             if (
               position.x + 16 >= x &&
               position.x - 16 <= x &&
@@ -109,7 +102,7 @@ function Player({
           break;
         case "s":
           let move1 = true;
-          (map === "main" ? boundaries : boundaries2).forEach(([x, y]) => {
+          (map === "Main" ? boundaries : boundaries2).forEach(([x, y]) => {
             if (
               position.x + 16 >= x &&
               position.x - 16 <= x &&
@@ -127,7 +120,7 @@ function Player({
           break;
         case "d":
           let move2 = true;
-          (map === "main" ? boundaries : boundaries2).forEach(([x, y]) => {
+          (map === "Main" ? boundaries : boundaries2).forEach(([x, y]) => {
             if (
               position.x + 32 >= x &&
               position.x - 16 <= x &&
@@ -146,7 +139,7 @@ function Player({
           break;
         case "a":
           let move3 = true;
-          (map === "main" ? boundaries : boundaries2).forEach(([x, y]) => {
+          (map === "Main" ? boundaries : boundaries2).forEach(([x, y]) => {
             if (
               position.x + 16 >= x &&
               position.x - 32 <= x &&
@@ -164,7 +157,7 @@ function Player({
           }
           break;
         default:
-          e.preventDefault();
+        /*           e.preventDefault(); */
       }
     }
   });

@@ -16,14 +16,16 @@ function GamePlayers({ database, user, map }) {
   useEffect(() => {
     data();
   }, []);
-  console.log(players);
+  /* console.log(players); */
   return (
     <div>
       {players &&
         players
           .filter((x) => x.address != user.address)
           .filter((x) => x.map == map)
-          .map((attributes) => <Players attributes={attributes} />)}
+          .map((attributes, id) => (
+            <Players attributes={attributes} key={id} />
+          ))}
     </div>
   );
 }

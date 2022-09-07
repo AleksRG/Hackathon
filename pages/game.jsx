@@ -12,9 +12,10 @@ import {
   HomeModernIcon,
   MapIcon,
 } from "@heroicons/react/24/outline";
+import Chat from "../components/chat/Chat";
 
 function Game({ user }) {
-  const [map, setMap] = useState("main");
+  const [map, setMap] = useState("Main");
   const [emo, setEmo] = useState("");
   const [message, setMessage] = useState("");
   const [playerName, setPlayerName] = useState("");
@@ -72,11 +73,11 @@ function Game({ user }) {
     setTyping("");
   }
   function changeMap() {
-    map === "main" ? setMap("Home") : setMap("main");
+    map === "Main" ? setMap("Home") : setMap("Main");
   }
   return (
     <div className="">
-      {map === "main" ? (
+      {map === "Main" ? (
         <div
           style={{
             left: 500,
@@ -101,13 +102,18 @@ function Game({ user }) {
           <MapIcon className="h-6 w-6 text-pink-600" />
         </div>
       )}
+      <div className="scrollbar-hide ">
+        {" "}
+        <img
+          src={`/${map}.png`}
+          loading="lazy"
+          className="max-w-[9500px] shadow-xl shadow-sky-300 "
+          onClick={() => setTyping("")}
+        />
+      </div>
 
-      <img
-        src={`/${map}.png`}
-        loading="lazy"
-        className="max-w-[9500px] shadow-xl shadow-sky-300"
-        onClick={() => setTyping("")}
-      />
+      <Chat database={database} user={user} map={map} hero={hero} />
+
       <GamePlayers database={database} user={user} map={map} />
       <Player
         database={database}
@@ -119,27 +125,28 @@ function Game({ user }) {
         playerName={playerName}
         map={map}
       />
+
       <div className="flex h-screen w-full items-center justify-center">
         {" "}
-        <div className="fixed bottom-3 flex max-w-2xl justify-center space-x-2 rounded-xl bg-gray-900/80 px-5 py-1 font-mono text-xl font-semibold text-pink-600 shadow-xl shadow-gray-700">
+        <div className="fixed bottom-3 flex max-w-2xl justify-center space-x-2 rounded-xl bg-slate-100/80 px-5 py-1 font-mono text-xl font-semibold text-pink-600 shadow-xl shadow-sky-300">
           {!showModal ? (
             <button
               onClick={() => setShowModal(true)}
-              className="rounded-md px-2 text-xs font-semibold text-pink-600"
+              className="rounded-md px-2 text-xs font-semibold text-[#041836]"
             >
               <FaceSmileIcon className="h-7 w-7" />
             </button>
           ) : (
             <button
               onClick={() => setShowModal(false)}
-              className="px-2 text-xs font-semibold text-pink-600"
+              className="px-2 text-xs font-semibold text-[#041836]"
             >
               <XCircleIcon className="h-7 w-7" />
             </button>
           )}
           <input
             type="text"
-            className="flex w-72 flex-grow items-center justify-center bg-transparent text-sm font-semibold text-gray-300 placeholder-gray-500 outline-none placeholder:text-center"
+            className="flex w-72 flex-grow  font-normal items-center justify-center bg-transparent  text-sm text-[#041836] placeholder-gray-500 outline-none font-mono placeholder:text-center "
             value={message}
             maxLength="40"
             onFocus={() => setTyping("typing")}
@@ -148,15 +155,15 @@ function Game({ user }) {
           />{" "}
           <button
             onClick={clear}
-            className="rounded-md px-2 text-xs font-semibold text-pink-600"
+            className="rounded-md px-2 text-xs font-semibold text-[#041836]"
           >
             <ArchiveBoxXMarkIcon className="h-6 w-6" />
           </button>
           {showModal && (
             <>
               {" "}
-              <div className="fixed bottom-14 flex h-9 items-center justify-center overflow-y-auto overflow-x-hidden rounded-xl bg-gray-900/80 px-2 outline-none focus:outline-none">
-                <div className="relative mx-auto w-auto space-x-1 text-[#041836]">
+              <div className="fixed bottom-14 flex h-9 items-center justify-center overflow-y-auto overflow-x-hidden rounded-xl bg-slate-100/80  px-2 outline-none focus:outline-none">
+                <div className="relative mx-auto w-auto space-x-1">
                   {emogies.map((emo, id) => (
                     <button key={id} onClick={() => setEmo(emo)}>
                       {emo}
@@ -167,7 +174,7 @@ function Game({ user }) {
             </>
           )}
         </div>
-        <div className="fixed bottom-3 left-10 flex w-40 max-w-2xl cursor-pointer justify-center rounded-xl bg-gray-900/80 px-5 py-1 font-mono font-semibold text-pink-600 shadow-xl shadow-gray-700">
+        <div className="fixed bottom-3 left-10 flex w-40 max-w-2xl cursor-pointer justify-center rounded-xl bg-slate-100/80 px-5 py-1 font-mono text-[#041836] shadow-xl shadow-sky-300">
           {!showModal2 ? (
             <button onClick={() => setShowModal2(true)}>UserName</button>
           ) : (
@@ -177,9 +184,9 @@ function Game({ user }) {
           {showModal2 && (
             <>
               {" "}
-              <div className="fixed bottom-14 left-10 mx-auto flex w-56 flex-col space-y-2 rounded-md bg-gray-900/80 p-2">
+              <div className="fixed bottom-14 left-10 mx-auto flex w-56 flex-col space-y-2 rounded-xl bg-slate-100/80 p-2">
                 <input
-                  className="w-full bg-transparent text-center text-sm text-gray-300 placeholder-gray-500 outline-none"
+                  className="w-full bg-transparent text-center text-sm text-[#041836]  placeholder-gray-500 outline-none"
                   placeholder={`Enter your new Username`}
                   value={playerName}
                   maxLength="7"
@@ -194,7 +201,7 @@ function Game({ user }) {
       <div className="aboslute">
         {showSidebar ? (
           <button
-            className="fixed inset-y-1/2 z-50 ml-52 h-8 w-8 cursor-pointer items-center text-pink-600 duration-1000 ease-in-out"
+            className="fixed inset-y-1/2 z-50 ml-52 h-8 w-8 cursor-pointer items-center text-[#041836] duration-1000 ease-in-out"
             onClick={() => setShowSidebar(!showSidebar)}
           >
             <SwatchIcon className="h-6 w-6" />
@@ -202,14 +209,14 @@ function Game({ user }) {
         ) : (
           <button
             onClick={() => setShowSidebar(!showSidebar)}
-            className="fixed inset-y-1/2 -left-5 z-50 flex h-12 w-12 cursor-pointer items-center justify-center rounded-md bg-gray-900/80 text-pink-600 shadow-md duration-1000 ease-in-out"
+            className="fixed inset-y-1/2 -left-5 z-50 flex h-12 w-12 cursor-pointer items-center justify-center rounded-md bg-slate-100/80  text-[#041836] shadow-md duration-1000 ease-in-out"
           >
             <SwatchIcon className="h-6 w-6 ml-5" />
           </button>
         )}
 
         <div
-          className={`fixed top-0 left-0 h-full w-60 rounded-r-2xl bg-gray-900/80 p-4 duration-1000 ease-in-out ${
+          className={`fixed top-0 left-0 h-full w-60 rounded-r-2xl bg-slate-100/80 p-4 duration-1000 ease-in-out shadow-2xl shadow-sky-300 ${
             showSidebar ? "" : "-translate-x-full"
           }`}
         >

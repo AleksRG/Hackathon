@@ -15,7 +15,7 @@ function useWalk(maxSteps, x, y) {
     w: 3,
   };
 
-  const stepSize = 16; //8 was old value
+  const stepSize = 16;
   const modifier = {
     s: { x: 0, y: stepSize },
     a: { x: -stepSize, y: 0 },
@@ -37,6 +37,7 @@ function useWalk(maxSteps, x, y) {
       y: prev.y + modifier[dir].y >= 0 ? prev.y + modifier[dir].y : prev.y,
     }));
   }
+
   return {
     walk,
     dir,
