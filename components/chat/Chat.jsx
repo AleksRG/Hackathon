@@ -2,12 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import SendMessage from "./SendMessage";
 import Message from "./Message.jsx";
-import {
-  ChatBubbleLeftRightIcon,
-  SwatchIcon,
-} from "@heroicons/react/24/outline";
+import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
 
-function Messages({ database, map, user, hero }) {
+function Chat({ database, map, user, hero }) {
   const endOfMessagesRef = useRef(null);
   const [players, setPlayers] = useState();
   const [showSidebar, setShowSidebar] = useState(false);
@@ -40,7 +37,7 @@ function Messages({ database, map, user, hero }) {
     <div className="">
       {showSidebar ? (
         <button
-          className="fixed inset-y-1/2 -right-5 z-50 ml-52 h-12 w-12 cursor-pointer items-center text-[#041836] rounded-md bg-slate-100/80 duration-1000 ease-in-out shadow-md"
+          className="fixed bottom-3 -right-4 z-50 ml-52 flex h-10 w-16 cursor-pointer items-center justify-center rounded-xl bg-white/60 text-[#041836]  shadow-2xl shadow-sky-500 outline-none duration-1000 ease-in-out focus:outline-none"
           onClick={() => setShowSidebar(!showSidebar)}
         >
           <ChatBubbleLeftRightIcon className="h-6 w-6" />
@@ -48,7 +45,7 @@ function Messages({ database, map, user, hero }) {
       ) : (
         <button
           onClick={() => setShowSidebar(!showSidebar)}
-          className="fixed inset-y-1/2 right-[370px] z-50 flex h-8 w-12 cursor-pointer items-center justify-center rounded-md text-[#041836] duration-1000 ease-in-out"
+          className="fixed bottom-3 right-[370px]  z-50 flex h-10 w-20 cursor-pointer items-center justify-center rounded-xl bg-gradient-to-r from-sky-300/40 to-transparent text-fuchsia-400 shadow-2xl shadow-sky-500 outline-none duration-1000 ease-in-out focus:outline-none"
         >
           <ChatBubbleLeftRightIcon className="h-6 w-6 mr-5" />
         </button>
@@ -91,4 +88,4 @@ function Messages({ database, map, user, hero }) {
   );
 }
 
-export default Messages;
+export default Chat;

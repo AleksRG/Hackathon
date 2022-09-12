@@ -20,7 +20,8 @@
     "react-dom": "18.2.0",
     "tailwind-scrollbar-hide": "^1.1.7",
     "timeago-react": "^3.0.5",
-    "wagmi": "^0.6.4"
+    "wagmi": "^0.6.4",
+    "web3.storage": "^4.4.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",

@@ -4,15 +4,16 @@ import Player from "../components/player/Player";
 import LogOut from "../components/LogOut";
 import { useState } from "react";
 import GamePlayers from "../components/GamePlayers";
+import Storage from "../components/web3Storage/Storage";
+import Chat from "../components/chat/Chat";
 import {
   FaceSmileIcon,
   XCircleIcon,
   ArchiveBoxXMarkIcon,
-  SwatchIcon,
   HomeModernIcon,
   MapIcon,
+  PaintBrushIcon,
 } from "@heroicons/react/24/outline";
-import Chat from "../components/chat/Chat";
 
 function Game({ user }) {
   const [map, setMap] = useState("Main");
@@ -22,7 +23,6 @@ function Game({ user }) {
   const [typing, setTyping] = useState("");
   const [hero, setHero] = useState("a4");
   const [showSidebar, setShowSidebar] = useState(false);
-  const [showModal2, setShowModal2] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const emogies = [
@@ -102,16 +102,16 @@ function Game({ user }) {
           <MapIcon className="h-6 w-6 text-pink-600" />
         </div>
       )}
-      <div className="scrollbar-hide ">
+      <div className="">
         {" "}
         <img
           src={`/${map}.png`}
           loading="lazy"
-          className="max-w-[9500px] shadow-xl shadow-sky-300 "
+          className="max-w-[9500px] shadow-xl shadow-sky-300"
           onClick={() => setTyping("")}
         />
       </div>
-
+      <Storage user={user} />
       <Chat database={database} user={user} map={map} hero={hero} />
 
       <GamePlayers database={database} user={user} map={map} />
@@ -174,44 +174,21 @@ function Game({ user }) {
             </>
           )}
         </div>
-        <div className="fixed bottom-3 left-10 flex w-40 max-w-2xl cursor-pointer justify-center rounded-xl bg-slate-100/80 px-5 py-1 font-mono text-[#041836] shadow-xl shadow-sky-300">
-          {!showModal2 ? (
-            <button onClick={() => setShowModal2(true)}>UserName</button>
-          ) : (
-            <button onClick={() => setShowModal2(false)}>Save</button>
-          )}
-
-          {showModal2 && (
-            <>
-              {" "}
-              <div className="fixed bottom-14 left-10 mx-auto flex w-56 flex-col space-y-2 rounded-xl bg-slate-100/80 p-2">
-                <input
-                  className="w-full bg-transparent text-center text-sm text-[#041836]  placeholder-gray-500 outline-none"
-                  placeholder={`Enter your new Username`}
-                  value={playerName}
-                  maxLength="7"
-                  onFocus={() => setTyping("typing")}
-                  onChange={(e) => setNewUsername(e)}
-                />
-              </div>
-            </>
-          )}
-        </div>
       </div>
       <div className="aboslute">
         {showSidebar ? (
           <button
-            className="fixed inset-y-1/2 z-50 ml-52 h-8 w-8 cursor-pointer items-center text-[#041836] duration-1000 ease-in-out"
+            className="fixed bottom-3 left-48 z-50 flex h-10 w-20 cursor-pointer items-center justify-center rounded-xl bg-gradient-to-l from-sky-300/40 to-transparent text-fuchsia-400 shadow-2xl shadow-sky-500 outline-none duration-1000 ease-in-out focus:outline-none"
             onClick={() => setShowSidebar(!showSidebar)}
           >
-            <SwatchIcon className="h-6 w-6" />
+            <PaintBrushIcon className="h-5 w-5" />
           </button>
         ) : (
           <button
             onClick={() => setShowSidebar(!showSidebar)}
-            className="fixed inset-y-1/2 -left-5 z-50 flex h-12 w-12 cursor-pointer items-center justify-center rounded-md bg-slate-100/80  text-[#041836] shadow-md duration-1000 ease-in-out"
+            className="fixed bottom-3 -left-8 z-50 flex h-10 w-20 cursor-pointer items-center justify-center rounded-xl bg-white/60 text-[#041836]  shadow-2xl shadow-sky-500 outline-none duration-1000 ease-in-out focus:outline-none"
           >
-            <SwatchIcon className="h-6 w-6 ml-5" />
+            <PaintBrushIcon className="ml-4 h-5 w-5" />
           </button>
         )}
 
@@ -220,11 +197,11 @@ function Game({ user }) {
             showSidebar ? "" : "-translate-x-full"
           }`}
         >
-          <div className="ml-2 flex h-full w-44 flex-col items-center justify-center space-y-2">
+          <div className="ml-2 flex w-44 flex-col items-center  space-y-2 justify-between h-full">
             {heroes?.map((hero, id) => (
               <div
                 key={id}
-                className=" h-8 w-8 cursor-pointer rounded-md bg-no-repeat hover:ring-2 hover:ring-sky-600"
+                className="h-8 w-8 min-h-12 cursor-pointer rounded-md bg-no-repeat"
                 onClick={() => setHero(hero)}
                 style={{
                   backgroundImage: `url(sprites/skins/${hero}.png)`,
@@ -232,10 +209,20 @@ function Game({ user }) {
                 }}
               ></div>
             ))}
+
+            <input
+              className="flex w-40 justify-center rounded-xl bg-slate-100/80 px-5 py-1 font-mono text-[#041836] placeholder:text-[#041836] shadow-xl shadow-sky-300 placeholder:text-center outline-none text-center"
+              placeholder={`UserName`}
+              value={playerName}
+              maxLength="7"
+              onFocus={() => setTyping("typing")}
+              onChange={(e) => setNewUsername(e)}
+            />
+
+            <LogOut />
           </div>
         </div>
       </div>
-      <LogOut />
     </div>
   );
 }
