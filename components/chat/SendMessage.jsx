@@ -21,7 +21,7 @@ function SendMessage({ endOfMessagesRef, database, map, user, hero }) {
   }
 
   return (
-    <form className="flex h-8 w-full items-center rounded-lg bg-slate-100/80 px-2 font-mono opacity-80 shadow-lg shadow-sky-100 text-[#041836]  ring-gray-100/60 scrollbar-hide hover:ring-2">
+    <form className="flex h-8 w-full items-center rounded-lg bg-slate-100/80 px-2 font-mono opacity-80 shadow-lg shadow-sky-100 text-[#041836] ring-gray-100/60 scrollbar-hide hover:ring-2">
       <input
         type="text"
         className="w-full bg-transparent text-center text-sm placeholder-gray-500 outline-none"

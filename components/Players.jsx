@@ -39,12 +39,12 @@ function Players({ attributes }) {
               </p>
             </div>
           )
-        ) : !attributes.message ? (
-          <p className="-mt-8 flex cursor-default items-center justify-center rounded-md bg-gray-200 px-3 py-0.5 shadow-md shadow-stone-900">
-            {attributes.emoji}
-          </p>
         ) : (
-          ""
+          !attributes.message && (
+            <p className="-mt-8 flex cursor-default items-center justify-center rounded-md bg-gray-200 px-3 py-0.5 shadow-md shadow-stone-900">
+              {attributes.emoji}
+            </p>
+          )
         )}
       </div>
     </div>

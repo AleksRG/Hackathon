@@ -37,12 +37,12 @@ function Sprite({ image, data, position, name, emoji, message, playerName }) {
               <p className="m-auto flex justify-center">{playerName}</p>
             </div>
           )
-        ) : !message ? (
-          <p className="-mt-8 flex cursor-default items-center justify-center rounded-md bg-gray-200 px-3 py-0.5 shadow-md shadow-stone-900">
-            {emoji}
-          </p>
         ) : (
-          ""
+          !message && (
+            <p className="-mt-8 flex cursor-default items-center justify-center rounded-md bg-gray-200 px-3 py-0.5 shadow-md shadow-stone-900">
+              {emoji}
+            </p>
+          )
         )}
       </div>
     </>
