@@ -35,16 +35,21 @@ function Chat({ database, map, user, hero }) {
 
   return (
     <div>
-      <button
-        onClick={() => setShowSidebar(!showSidebar)}
-        className={`fixed bottom-3 z-50 flex cursor-pointer items-center justify-center rounded-xl  shadow-2xl shadow-sky-500 outline-none duration-1000 ease-in-out focus:outline-none ${
-          showSidebar
-            ? "h-10 w-20 right-[370px] bg-gradient-to-r from-sky-300/40 to-transparent text-fuchsia-400"
-            : "h-10 w-16 ml-52 -right-4 bg-white/60 text-[#041836] shadow-lg shadow-sky-100 "
-        }`}
-      >
-        <ChatBubbleLeftRightIcon className="h-6 w-6 mr-5" />
-      </button>
+      {showSidebar ? (
+        <button
+          onClick={() => setShowSidebar(!showSidebar)}
+          className="fixed bottom-3 h-10 z-50 flex cursor-pointer items-center justify-center rounded-xl outline-none duration-1000 ease-in-out focus:outline-none w-20 right-[370px] bg-gradient-to-r from-sky-300/40 to-transparent text-fuchsia-400 shadow-2xl shadow-sky-500"
+        >
+          <ChatBubbleLeftRightIcon className="h-6 w-6 mr-5" />
+        </button>
+      ) : (
+        <button
+          onClick={() => setShowSidebar(!showSidebar)}
+          className="fixed bottom-3 h-10 z-50 flex cursor-pointer items-center justify-center rounded-xl outline-none duration-1000 ease-in-out focus:outline-none w-16 ml-52 -right-4 bg-white/60 text-[#041836] shadow-lg shadow-sky-100"
+        >
+          <ChatBubbleLeftRightIcon className="h-6 w-6 mr-5" />
+        </button>
+      )}
 
       <div
         className={`fixed top-0 -right-[430px] h-full rounded-l-2xl bg-slate-100/80 px-4 py-2 duration-1000 ease-in-out shadow-2xl shadow-sky-300 ${

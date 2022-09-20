@@ -1,13 +1,14 @@
 import { getSession } from "next-auth/react";
-import { database } from "../fireabse";
+import { database, storage } from "../fireabse";
 import Player from "../components/player/Player";
 import Balance from "../components/player/Balance";
 import LogOut from "../components/LogOut";
 import { useState } from "react";
-import GamePlayers from "../components/GamePlayers";
+import GamePlayers from "../components/game/GamePlayers";
 import Storage from "../components/web3Storage/Storage";
 import Chat from "../components/chat/Chat";
-import Buy from "../components/payments/Buy";
+import Build from "../components/payments/Build";
+import Buldings from "../components/payments/Buldings";
 import {
   FaceSmileIcon,
   XCircleIcon,
@@ -79,7 +80,7 @@ function Game({ user }) {
   }
 
   return (
-    <div className="">
+    <div>
       {map === "Main" ? (
         <div
           style={{
@@ -114,7 +115,8 @@ function Game({ user }) {
           onClick={() => setTyping("")}
         />
       </div>
-      <Buy />
+      <Buldings database={database} map={map} user={user} />
+      <Build user={user} database={database} />
       <Balance user={user} />
       <Storage user={user} />
       <Chat database={database} user={user} map={map} hero={hero} />
@@ -166,7 +168,7 @@ function Game({ user }) {
           {showModal && (
             <>
               {" "}
-              <div className="fixed bottom-14 flex h-9 items-center justify-center overflow-y-auto overflow-x-hidden rounded-xl bg-slate-100/80  px-2 outline-none focus:outline-none">
+              <div className="fixed bottom-14 flex h-9 items-center justify-center overflow-y-auto overflow-x-hidden rounded-xl bg-slate-100/80  px-2 outline-none focus:outline-none ">
                 <div className="relative mx-auto w-auto space-x-1">
                   {emogies.map((emo, id) => (
                     <button key={id} onClick={() => setEmo(emo)}>
@@ -180,16 +182,22 @@ function Game({ user }) {
         </div>
       </div>
       <div className="aboslute">
-        <button
-          className={`fixed bottom-3 z-50 flex h-10 w-20 cursor-pointer items-center justify-center rounded-xl  shadow-2xl shadow-sky-500 outline-none duration-1000 ease-in-out focus:outline-none ${
-            showSidebar
-              ? "bg-gradient-to-l from-sky-300/40 to-transparent text-fuchsia-400 left-48"
-              : "bg-white/60 shadow-lg shadow-sky-100  text-[#041836] -left-8"
-          }`}
-          onClick={() => setShowSidebar(!showSidebar)}
-        >
-          <PaintBrushIcon className={`h-5 w-5 ml-4`} />
-        </button>
+        {showSidebar ? (
+          <button
+            className="fixed bottom-3 z-50 flex h-10 w-20 cursor-pointer items-center justify-center rounded-xl outline-none duration-1000 ease-in-out focus:outline-none bg-gradient-to-l from-sky-300/40 to-transparent text-fuchsia-400 left-48 shadow-sky-500 shadow-2xl"
+            onClick={() => setShowSidebar(!showSidebar)}
+          >
+            <PaintBrushIcon className={`h-5 w-5 ml-4`} />
+          </button>
+        ) : (
+          <button
+            className="fixed bottom-3 z-50 flex h-10 w-20 cursor-pointer items-center justify-center rounded-xl outline-none duration-1000 ease-in-out focus:outline-none
+                bg-white/60 shadow-lg shadow-sky-100 text-[#041836] -left-8"
+            onClick={() => setShowSidebar(!showSidebar)}
+          >
+            <PaintBrushIcon className={`h-5 w-5 ml-4`} />
+          </button>
+        )}
 
         <div
           className={`fixed top-0 left-0 h-full w-60 rounded-r-2xl bg-slate-100/80 p-4 duration-1000 ease-in-out shadow-2xl shadow-sky-300 ${

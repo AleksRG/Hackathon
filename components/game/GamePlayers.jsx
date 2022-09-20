@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
-import Players from "./Players";
+import Players from "../game/Players";
 function GamePlayers({ database, user, map }) {
   const colectionRef = collection(database, "Players");
   const [players, setPlayers] = useState();
