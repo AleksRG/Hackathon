@@ -8,11 +8,11 @@ const config = {
 };
 
 export default async function handler(req, res) {
-  const { address, chain, network } = req.body;
-
-  await Moralis.start({ apiKey: process.env.MORALIS_API_KEY });
-
   try {
+    const { address, chain, network } = req.body;
+
+    await Moralis.start({ apiKey: process.env.MORALIS_API_KEY });
+
     const message = await Moralis.Auth.requestMessage({
       address,
       chain,
