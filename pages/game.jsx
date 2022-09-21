@@ -1,4 +1,3 @@
-import { getSession } from "next-auth/react";
 import { database } from "../fireabse";
 import Player from "../components/player/Player";
 import Balance from "../components/player/Balance";
@@ -7,8 +6,10 @@ import { useState } from "react";
 import GamePlayers from "../components/game/GamePlayers";
 import Storage from "../components/web3Storage/Storage";
 import Chat from "../components/chat/Chat";
-
 import Buldings from "../components/payments/Buldings";
+import { getSession } from "next-auth/react";
+import { getToken } from "next-auth/jwt";
+
 import {
   FaceSmileIcon,
   XCircleIcon,
@@ -118,7 +119,6 @@ function Game({ user }) {
         />
       </div>
       <Buldings database={database} map={map} user={user} />
-
       <Balance user={user} />
       <Storage user={user} />
       <Chat database={database} user={user} map={map} hero={hero} />
@@ -238,6 +238,10 @@ function Game({ user }) {
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
+  const token = await getToken(context);
+  console.log("SESSION", session);
+  console.log("JWT", token);
+
   // redirect if not authenticated
   if (!session) {
     return {

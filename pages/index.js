@@ -2,11 +2,16 @@ import Head from "next/head";
 import Header from "../components/frontend/Header";
 import Main from "../components/frontend/Main";
 import Footer from "../components/frontend/Footer";
-import axios from "axios";
+// import axios from "axios";
+// import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+// import { signIn } from "next-auth/react";
+// import { useAccount, useConnect, useSignMessage, useDisconnect } from "wagmi";
+// import { useRouter } from "next/router";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { signIn } from "next-auth/react";
 import { useAccount, useConnect, useSignMessage, useDisconnect } from "wagmi";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 export default function Home() {
   const { connectAsync } = useConnect();
@@ -19,7 +24,6 @@ export default function Home() {
     if (isConnected) {
       await disconnectAsync();
     }
-
     const { account, chain } = await connectAsync({
       connector: new MetaMaskConnector(),
     });
@@ -32,19 +36,24 @@ export default function Home() {
       },
     });
 
-    const message = await data.message;
+    const message = data.message;
 
     const signature = await signMessageAsync({ message });
 
+    // redirect user after success authentication to '/user' page
     const { url } = await signIn("credentials", {
       message,
       signature,
       redirect: false,
       callbackUrl: "/game",
     });
-
+    /**
+     * instead of using signIn(..., redirect: "/game")
+     * we get the url from callback and push it to the router to avoid page refreshing
+     */
     push(url);
   };
+
   return (
     <div>
       <Head>
@@ -55,6 +64,7 @@ export default function Home() {
 
       <main>
         <div className="flex flex-col min-h-screen w-full items-center text-center">
+          {" "}
           <Header />
           <button
             onClick={() => handleAuth()}

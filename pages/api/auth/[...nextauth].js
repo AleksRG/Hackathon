@@ -26,6 +26,8 @@ export default NextAuth({
 
           await Moralis.start({ apiKey: process.env.MORALIS_API_KEY });
 
+          console.log({ message, signature });
+
           const { address, profileId } = (
             await Moralis.Auth.verify({ message, signature, network: "evm" })
           ).raw;
