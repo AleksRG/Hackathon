@@ -1,4 +1,3 @@
-import Image from "next/image";
 
 function Avatar({ hero }) {
   return (
