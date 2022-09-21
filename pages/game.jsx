@@ -118,7 +118,7 @@ function Game({ user }) {
           alt=" "
         />
       </div>
-      {/* <Buldings database={database} map={map} user={user} />
+      <Buldings database={database} map={map} user={user} />
       <Balance user={user} />
       <Storage user={user} />
       <Chat database={database} user={user} map={map} hero={hero} />
@@ -132,7 +132,7 @@ function Game({ user }) {
         user={user}
         playerName={playerName}
         map={map}
-      /> */}
+      />
 
       <div className="flex h-screen w-full items-center justify-center">
         {" "}
@@ -246,7 +246,7 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       redirect: {
-        destination: "/",
+        destination: "/signin",
         permanent: false,
       },
     };
