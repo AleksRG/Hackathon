@@ -115,7 +115,7 @@ function Game({ user }) {
           loading="lazy"
           className="max-w-[9500px] shadow-xl shadow-sky-300"
           onClick={() => setTyping("")}
-          alt={`Game ${map}`}
+          alt=" "
         />
       </div>
       <Buldings database={database} map={map} user={user} />
