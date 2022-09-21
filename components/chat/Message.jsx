@@ -1,5 +1,5 @@
 import TimeAgo from "timeago-react";
-import Avatar from "./AVatar";
+import Avatar from "./Avatar";
 
 function Message({ message }) {
   return (
