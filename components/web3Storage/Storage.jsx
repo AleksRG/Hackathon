@@ -85,6 +85,7 @@ function Storage({ user }) {
                     <img
                       className="rounded-2xl"
                       src={`https://${job.cid}.ipfs.w3s.link/${job.name}`}
+                      alt=""
                     />
                   </div>
                 ))}
@@ -94,6 +95,7 @@ function Storage({ user }) {
                   src={preview}
                   objectfit="cover"
                   className="rounded-lg w-full items-center mt-2"
+                  alt=""
                 />
               )}
               <div ref={endOfMessagesRef} className="text-xs my-2 text-center">

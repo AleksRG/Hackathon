@@ -20,7 +20,7 @@ function Main() {
               <div className="flex justify-between px-4">
                 <div className="w-20 bg-teal-100/70 h-4 rounded-sm"></div>
                 <div className="flex items-center">
-                  <img src="polygon.svg" className="h-5" />
+                  <img src="polygon.svg" className="h-5" alt="polygon" />
                   <div className="w-8 bg-teal-100/70 h-4 rounded-sm"></div>
                 </div>
               </div>
@@ -80,7 +80,7 @@ function Main() {
             in the job section
           </p>
           <span className="text-[#041836] text-lg font-semibold">
-            Make them easy to read, here's an example
+            Make them easy to read, here is an example
           </span>
         </div>
         <div className="h-[460px] relative w-[660px] rounded-3xl shadow-2xl shadow-sky-500 bg-[url('../public/frontend/poly.png')]  bg-cover bg-left flex justify-around text-xl flex-col p-4"></div>{" "}
