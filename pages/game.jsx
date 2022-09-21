@@ -1,5 +1,5 @@
 import { getSession } from "next-auth/react";
-import { database, storage } from "../fireabse";
+import { database } from "../fireabse";
 import Player from "../components/player/Player";
 import Balance from "../components/player/Balance";
 import LogOut from "../components/LogOut";
@@ -7,7 +7,7 @@ import { useState } from "react";
 import GamePlayers from "../components/game/GamePlayers";
 import Storage from "../components/web3Storage/Storage";
 import Chat from "../components/chat/Chat";
-import Build from "../components/payments/Build";
+
 import Buldings from "../components/payments/Buldings";
 import {
   FaceSmileIcon,
@@ -44,6 +44,7 @@ function Game({ user }) {
     "😎",
     "💣",
     "⭐",
+    "🎃",
   ];
   const heroes = [
     "a1",
@@ -85,10 +86,10 @@ function Game({ user }) {
         <div
           style={{
             left: 500,
-            top: 520,
+            top: 500,
           }}
           onClick={changeMap}
-          className="absolute flex h-10 w-20 animate-pulse items-center justify-center rounded-xl bg-white/50 px-2"
+          className="absolute flex cursor-pointer h-10 w-20 animate-pulse items-center justify-center rounded-xl bg-white/50 px-2"
         >
           {" "}
           <HomeModernIcon className="h-6 w-6" />
@@ -100,7 +101,7 @@ function Game({ user }) {
             top: 260,
           }}
           onClick={changeMap}
-          className="absolute flex h-10 w-20 animate-pulse items-center justify-center rounded-xl bg-white/50 px-2"
+          className="absolute cursor-pointer flex h-10 w-20 animate-pulse items-center justify-center rounded-xl bg-white/50 px-2"
         >
           {" "}
           <MapIcon className="h-6 w-6 text-pink-600" />
@@ -116,7 +117,7 @@ function Game({ user }) {
         />
       </div>
       <Buldings database={database} map={map} user={user} />
-      <Build user={user} database={database} />
+
       <Balance user={user} />
       <Storage user={user} />
       <Chat database={database} user={user} map={map} hero={hero} />

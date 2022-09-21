@@ -6,7 +6,7 @@ function Sprite({ image, data, position, name, emoji, message, playerName }) {
     <>
       {message && (
         <div
-          className="absolute flex max-h-16 min-w-[90px] max-w-[140px] items-center justify-center overflow-visible rounded-md bg-gray-200 py-1 px-1 font-mono text-xs font-semibold text-[#041836] shadow-md shadow-stone-900"
+          className="absolute flex max-h-16 min-w-[90px] max-w-[140px] items-center justify-center overflow-visible rounded-md py-1 px-1 font-mono text-xs font-semibold text-[#041836] bg-slate-100/80 shadow-lg shadow-sky-100 "
           style={{
             left: position.x - 30,
             top: position.y - 35,
@@ -39,7 +39,7 @@ function Sprite({ image, data, position, name, emoji, message, playerName }) {
           )
         ) : (
           !message && (
-            <p className="-mt-8 flex cursor-default items-center justify-center rounded-md bg-gray-200 px-3 py-0.5 shadow-md shadow-stone-900">
+            <p className="-mt-9 flex cursor-default items-center justify-center rounded-md bg-slate-100/80 shadow-lg shadow-sky-100 px-3 py-0.5">
               {emoji}
             </p>
           )

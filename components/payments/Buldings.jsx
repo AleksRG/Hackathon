@@ -16,7 +16,7 @@ function Buldings({ database, map }) {
   const [error, setError] = useState();
   const [txs, setTxs] = useState([]);
 
-  const startPayment = async ({ setError, setTxs, ether, addr }) => {
+  const startPayment = async ({ setError, setTxs, ether, addr, x, y, id }) => {
     try {
       if (!window.ethereum)
         throw new Error("No crypto wallet found. Please install it.");
@@ -30,6 +30,12 @@ function Buldings({ database, map }) {
       });
       console.log({ ether, addr });
       console.log("tx", tx);
+
+      const building = doc(database, "Builds", id);
+      updateDoc(building, {
+        price: "0",
+      });
+      // console.log(x, y, id);
       setTxs([tx]);
     } catch (err) {
       setError(err.message);
@@ -41,14 +47,12 @@ function Buldings({ database, map }) {
     await startPayment({
       setError,
       setTxs,
-      ether: "0.1",
+      ether: price,
       addr: addressTo,
+      x,
+      y,
+      id,
     });
-    const building = doc(database, "Bilds", id);
-    updateDoc(building, {
-      price: 0,
-    });
-    console.log(x, y, id);
   }
 
   const data = () => {
@@ -79,7 +83,7 @@ function Buldings({ database, map }) {
               key={id}
               style={{
                 left: plot.x,
-                top: plot.y,
+                top: plot.y + 40,
               }}
             >
               <span>Build </span>

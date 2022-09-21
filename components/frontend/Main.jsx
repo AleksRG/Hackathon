@@ -92,7 +92,7 @@ function Main() {
           <span className="text-[#041836]"> movement </span>
         </h2>
         <div className="grid grid-flow-col grid-rows-3 grid-cols-3 gap-8 ">
-          <div className="row-start-2 col-start-1 justify-center flex items-center ">
+          <div className="row-start-2 col-start-1 justify-center flex items-center">
             <Button symbol={"A"} />
           </div>
           <div className="row-start-1 col-start-2 justify-center flex items-center">
