@@ -117,12 +117,12 @@ function Game({ user }) {
           alt=" "
         />
       </div>
-//       <Buldings database={database} map={map} user={user} />
+      <Buldings database={database} map={map} user={user} />
 
-//       <Balance user={user} />
-//       <Storage user={user} />
-//       <Chat database={database} user={user} map={map} hero={hero} />
-//       <GamePlayers database={database} user={user} map={map} />
+      <Balance user={user} />
+      <Storage user={user} />
+      <Chat database={database} user={user} map={map} hero={hero} />
+      <GamePlayers database={database} user={user} map={map} />
       <Player
         database={database}
         hero={hero}
