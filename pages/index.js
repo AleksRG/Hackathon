@@ -32,7 +32,7 @@ export default function Home() {
       },
     });
 
-    const message = data.message;
+    const message = await data.message;
 
     const signature = await signMessageAsync({ message });
 
