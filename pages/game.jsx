@@ -243,14 +243,14 @@ export async function getServerSideProps(context) {
   console.log("JWT", token);
 
   // redirect if not authenticated
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
+  // if (!session) {
+  //   return {
+  //     redirect: {
+  //       destination: "/",
+  //       permanent: false,
+  //     },
+  //   };
+  // }
 
   return {
     props: { user: session.user },
