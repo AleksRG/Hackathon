@@ -4,7 +4,7 @@ const config = {
   domain: process.env.APP_DOMAIN,
   statement: "Please sign this message to confirm your identity.",
   uri: process.env.NEXTAUTH_URL,
-  timeout: 60,
+  timeout: 100,
   expirationTime: new Date("2023/07/16 22:55").toISOString(),
   notBefore: new Date("2022/07/16 22:54").toISOString(),
 };
